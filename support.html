@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>支援金と義援金 — 防災士講演</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="back-btn" onclick="window.location.href='index.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>ホームへ</div>
+
+<div class="page">
+  <div class="page-label" style="color:var(--gold);">Section 04</div>
+  <h1>支援金と義援金、地震保険</h1>
+  <p class="lead">能登では大地震前に2度、計3度大地震があった</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">① 2022年6月19日</div>
+      <div class="tl-title">M5.4 / 最大震度6弱</div>
+      <div class="tl-desc">一部瓦直し。修理代80万円。保険金30万円。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">② 2023年5月5日</div>
+      <div class="tl-title">M6.5 / 最大震度6強</div>
+      <div class="tl-desc">瓦→トタンへ変更。修理代370万円。保険金300万円。<strong>ここで火災保険をMAXへ変更。</strong></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">③ 2024年1月1日</div>
+      <div class="tl-title">M7.6 / 最大震度7</div>
+      <div class="tl-desc">中規模半壊 → 公費解体。<strong>保険金額 1,500万円。</strong></div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>教訓：</strong> 2度目の地震後に火災保険（年間25万円）をMAXに変更 → 3度目で1,500万円が支払われた。震度はあてにならない。田舎では震度測定する機械が少ない。
+  </div>
+
+  <h3 class="sub">災害指定の流れと支援</h3>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon" style="background:rgba(244,162,97,0.1);color:var(--gold);">①</div>
+      <h3>災害救助法（発災当日）</h3>
+      <p>避難所・仮設住宅・応急修理。住宅応急修理：半壊以上 上限70.6万円。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(244,162,97,0.1);color:var(--gold);">②</div>
+      <h3>生活再建支援法（1月6日）</h3>
+      <p>基礎支援金：全壊100万 / 大規模半壊50万。加算支援金：建設200万 / 補修100万 / 賃借50万。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:rgba(244,162,97,0.1);color:var(--gold);">③</div>
+      <h3>激甚災害指定（1月11日）</h3>
+      <p>国庫補助率かさ上げ（復旧事業の国負担 2/3 → 最大9/10）。中小企業特例。</p>
+    </div>
+  </div>
+
+  <h3 class="sub">半壊でも解体なら全壊扱い</h3>
+  <div class="compare">
+    <div class="cmp-box">
+      <h3>補修する場合</h3>
+      <div class="cmp-row"><span>被災者生活再建支援金</span><span class="v">100万円</span></div>
+      <div class="cmp-row"><span>災害義援金</span><span class="v">65万円</span></div>
+      <div class="cmp-row"><span>義援金特別給付</span><span class="v">20万円</span></div>
+      <div class="cmp-row"><span>住宅応急修理</span><span class="v">最大70.6万円</span></div>
+      <div class="cmp-row"><span>合計</span><span class="v">約256万円</span></div>
+    </div>
+    <div class="cmp-box red">
+      <h3>解体する場合（全壊扱い）</h3>
+      <div class="cmp-row"><span>被災者生活再建支援金</span><span class="v">300万円</span></div>
+      <div class="cmp-row"><span>災害義援金</span><span class="v">260万円</span></div>
+      <div class="cmp-row"><span>義援金特別給付</span><span class="v">20万円</span></div>
+      <div class="cmp-row"><span>公費解体</span><span class="v">自己負担なし</span></div>
+      <div class="cmp-row"><span>合計</span><span class="v">約580万円</span></div>
+    </div>
+  </div>
+
+  <h3 class="sub">被害区分別 被災者生活再建支援金（複数人世帯）</h3>
+  <div class="tbl-wrap">
+    <table class="data">
+      <thead><tr><th>被害区分</th><th>基礎支援金</th><th>加算（建設）</th><th>加算（補修）</th><th>加算（賃借）</th><th>最大合計</th></tr></thead>
+      <tbody>
+        <tr><td>全壊</td><td>100万円</td><td>200万円</td><td>100万円</td><td>50万円</td><td class="hl">300万円</td></tr>
+        <tr><td>大規模半壊</td><td>50万円</td><td>200万円</td><td>100万円</td><td>50万円</td><td class="hl">250万円</td></tr>
+        <tr><td>中規模半壊</td><td>─</td><td>100万円</td><td>50万円</td><td>25万円</td><td class="hl">100万円</td></tr>
+        <tr><td>半壊（県・市制度）</td><td>─</td><td>200万円</td><td>100万円</td><td>50万円</td><td class="hl">200万円</td></tr>
+        <tr><td>準半壊</td><td>─</td><td>─</td><td>─</td><td>─</td><td>─</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="sub">私が実際に受け取った支援</h3>
+  <div class="stats">
+    <div class="stat"><div class="stat-val">約210万円</div><div class="stat-lbl">支援金合計</div></div>
+    <div class="stat"><div class="stat-val">0円</div><div class="stat-lbl">公費解体 自己負担</div></div>
+  </div>
+  <p style="font-size:.8rem;color:var(--text3);text-align:center;margin-top:.5rem;">中規模半壊・単数世帯・公費解体済（約210万円＋公費解体費）</p>
+
+  <div class="callout">
+    <strong>公費解体で気づいたこと：</strong> 荷物の片付け→置く場所がないため実質ほとんど捨てることに。必要な物は意外と少ないと知る。家族の写真はネガもないため貴重。電化製品は買えるが、思い出は買えない。持ち物が思い出中心になると、他人から見るとただのガラクタに見えるのかも知れない。
+  </div>
+</div>
+
+<footer><p>防災士講演資料 — 2026年4月19日</p></footer>
+</body>
+</html>
