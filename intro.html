@@ -5,6 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>自己紹介 — 防災士講演</title>
 <link rel="stylesheet" href="style.css">
+<script>
+var _scrollTarget=null;
+var _justOpened=false;
+function toggleCard(el){
+  _scrollTarget=el;
+  _justOpened=true;
+  var overlay=document.getElementById('cardOverlay');
+  var full=document.getElementById('cardFull');
+  full.innerHTML=el.innerHTML;
+  overlay.classList.add('on');
+  document.body.style.overflow='hidden';
+  setTimeout(function(){ _justOpened=false; },400);
+}
+function closeCard(){
+  if(_justOpened) return;
+  document.getElementById('cardOverlay').classList.remove('on');
+  document.body.style.overflow='';
+  if(_scrollTarget){_scrollTarget.scrollIntoView({behavior:'smooth',block:'center'});_scrollTarget=null;}
+}
+</script>
 </head>
 <body>
 <div class="back-btn" onclick="window.location.href='index.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>ホームへ</div>
@@ -15,12 +35,10 @@
   <p class="lead">東京から長野は八ヶ岳へ、八ヶ岳から能登へ、そして今</p>
 
   <div class="vid-wrap" style="max-width:560px;">
-    <video controls playsinline preload="metadata">
-      <source src="kawauam.mp4" type="video/mp4">
-    </video>
+    <iframe src="https://www.youtube.com/embed/tujeTNfkkJE" title="珠洲市川浦" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;aspect-ratio:16/9;height:auto;"></iframe>
   </div>
 
-  <div class="timeline">
+  <div class="timeline" onclick="toggleCard(this)">
     <div class="tl-item">
       <div class="tl-year">〜 2011</div>
       <div class="tl-title">東京時代</div>
@@ -63,11 +81,16 @@
     </div>
   </div>
 
-  <div class="callout">
+  <div class="callout" onclick="toggleCard(this)">
     <strong>人生は想定外の連続</strong> — だからこそ、備えが大切。
   </div>
 </div>
 
 <footer><p>防災士講演資料 — 2026年4月19日</p></footer>
+
+<div class="card-overlay" id="cardOverlay" onclick="closeCard()">
+  <button class="card-close" onclick="closeCard()">&times;</button>
+  <div class="card-full" id="cardFull"></div>
+</div>
 </body>
 </html>

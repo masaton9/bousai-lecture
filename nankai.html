@@ -5,37 +5,57 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>南海トラフに備えて — 防災士講演</title>
 <link rel="stylesheet" href="style.css">
+<script>
+var _scrollTarget=null;
+var _justOpened=false;
+function toggleCard(el){
+  _scrollTarget=el;
+  _justOpened=true;
+  var overlay=document.getElementById('cardOverlay');
+  var full=document.getElementById('cardFull');
+  full.innerHTML=el.innerHTML;
+  overlay.classList.add('on');
+  document.body.style.overflow='hidden';
+  setTimeout(function(){ _justOpened=false; },400);
+}
+function closeCard(){
+  if(_justOpened) return;
+  document.getElementById('cardOverlay').classList.remove('on');
+  document.body.style.overflow='';
+  if(_scrollTarget){_scrollTarget.scrollIntoView({behavior:'smooth',block:'center'});_scrollTarget=null;}
+}
+</script>
 </head>
 <body>
 <div class="back-btn" onclick="window.location.href='index.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>ホームへ</div>
 
 <div class="page">
-  <div class="page-label" style="color:var(--blue);">Section 07</div>
+  <div class="page-label" style="color:var(--blue);">Section 09</div>
   <h1>南海トラフに備えて！</h1>
   <p class="lead">富山県は本当に安全なのか？ —「安全」という思い込みが最大のリスク</p>
 
-  <div class="stats">
+  <div class="stats" onclick="toggleCard(this)">
     <div class="stat"><div class="stat-val">70〜80%</div><div class="stat-lbl">今後30年以内の発生確率</div></div>
     <div class="stat"><div class="stat-val">M8〜9</div><div class="stat-lbl">マグニチュード</div></div>
-    <div class="stat"><div class="stat-val">最大35万人</div><div class="stat-lbl">想定死者数</div></div>
+    <div class="stat"><div class="stat-val">最大約29.8万人</div><div class="stat-lbl">想定死者数</div></div>
     <div class="stat"><div class="stat-val">最大34m</div><div class="stat-lbl">想定津波高（高知県）</div></div>
     <div class="stat"><div class="stat-val">約270兆円</div><div class="stat-lbl">経済被害</div></div>
   </div>
 
   <h3 class="sub">地震規模・人的被害の比較</h3>
-  <div class="tbl-wrap">
+  <div class="tbl-wrap" onclick="toggleCard(this)">
     <table class="data">
       <thead><tr><th>項目</th><th>能登半島地震（実績）</th><th>南海トラフ（想定）</th><th>倍率</th></tr></thead>
       <tbody>
         <tr><td>マグニチュード</td><td>M7.6</td><td>M8〜9</td><td class="hl">エネルギー最大1,000倍</td></tr>
-        <tr><td>想定死者数</td><td>約489人</td><td>最大約35万人</td><td class="hl">約700倍</td></tr>
-        <tr><td>避難者数（最大）</td><td>約3.4万人</td><td>最大約950万人</td><td class="hl">約280倍</td></tr>
+        <tr><td>想定死者数</td><td>約489人</td><td>最大約35万人</td><td class="hl">約600倍</td></tr>
+        <tr><td>避難者数（最大）</td><td>約3.4万人</td><td>最大約1,230万人</td><td class="hl">約360倍</td></tr>
       </tbody>
     </table>
   </div>
 
   <h3 class="sub">建物被害の比較（想定）</h3>
-  <div class="tbl-wrap">
+  <div class="tbl-wrap" onclick="toggleCard(this)">
     <table class="data">
       <thead><tr><th>項目</th><th>能登半島地震（実績）</th><th>南海トラフ（想定）</th><th>倍率</th></tr></thead>
       <tbody>
@@ -49,7 +69,7 @@
   </div>
 
   <h3 class="sub">富山県の公式想定 — しかし…</h3>
-  <div class="compare">
+  <div class="compare" onclick="toggleCard(this)">
     <div class="cmp-box">
       <h3>公式の被害想定（2025年3月）</h3>
       <div class="cmp-row"><span>最大震度</span><span class="v">5弱</span></div>
@@ -63,7 +83,7 @@
   </div>
 
   <h3 class="sub">歴史が示す連動地震の恐怖 — 安政飛越地震（1858年）</h3>
-  <div class="timeline">
+  <div class="timeline" onclick="toggleCard(this)">
     <div class="tl-item">
       <div class="tl-year">1854年</div>
       <div class="tl-title">安政の東海・南海地震</div>
@@ -76,23 +96,23 @@
     </div>
   </div>
 
-  <div class="callout">
+  <div class="callout" onclick="toggleCard(this)">
     <strong>南海トラフ地震の数年後に、内陸断層が連動して富山を直撃した歴史がある。</strong>跡津川断層帯は現在も活断層 — 同じシナリオは再び起こりうる。
   </div>
 
   <h3 class="sub">魚津市の実際のリスク</h3>
   <div class="cards">
-    <div class="card">
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-icon">⚡</div>
       <h3>液状化</h3>
       <p>能登地震で魚津市は震度4。港周辺の駐車場で複数箇所の液状化が発生。震度5弱以上ではさらに広範囲で発生の恐れ。</p>
     </div>
-    <div class="card">
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-icon">🌊</div>
       <h3>津波</h3>
       <p>南海トラフ後の連動地震で4〜5mの津波が想定。沿岸部・港周辺が特にリスクが高い。富山湾は近距離のため到達が早い可能性。</p>
     </div>
-    <div class="card">
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-icon">⛰</div>
       <h3>土砂災害</h3>
       <p>西部山間部で土砂災害リスクあり。安政飛越地震では立山で大規模山体崩壊が発生。地震＋降雨で複合災害のリスクも。</p>
@@ -100,18 +120,39 @@
   </div>
 
   <h3 class="sub">南海トラフに備えて</h3>
-  <ol class="num">
+  <ol class="num" onclick="toggleCard(this)">
     <li><strong>直接被害は小さくても油断しない</strong> — 南海トラフ単体では富山の被害は軽微。しかし「安全」と思い込むことが最大のリスク。</li>
     <li><strong>連動地震に備える</strong> — 安政飛越地震（1858年）のように、南海トラフの数年後に内陸断層が動く可能性がある。跡津川断層帯は現在も活断層。</li>
     <li><strong>能登地震の教訓を活かす</strong> — 震度4で液状化が起きた事実。「備えておくべき物」はすべて有効。</li>
   </ol>
 
-  <div class="callout">
+  <div class="callout" onclick="toggleCard(this)">
     <strong>「知ること」が最大の防災。</strong> 備えは今日からできる。
   </div>
 
+  <h3 class="sub">出典・参考資料</h3>
+  <div style="font-size:0.78rem; color:var(--text3); line-height:1.9; padding:1rem; background:rgba(255,255,255,0.02); border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+    <p style="margin-bottom:0.5rem;"><strong>南海トラフ地震の想定データ：</strong></p>
+    <ul style="list-style:disc; padding-left:1.2rem; margin:0 0 1rem 0;">
+      <li>発生確率・マグニチュード — <a href="https://www.jishin.go.jp/regional_seismicity/rs_kaiko/k_nankai/" target="_blank" style="color:var(--accent);">地震調査研究推進本部「南海トラフで発生する地震」</a></li>
+      <li>想定死者数・避難者数・建物被害・経済被害 — <a href="https://www.bousai.go.jp/jishin/nankai/taisaku_wg_02/pdf/saidai_01.pdf" target="_blank" style="color:var(--accent);">内閣府 中央防災会議「南海トラフ巨大地震 最大クラス地震における被害想定について」</a></li>
+      <li>想定津波高（高知県34m） — <a href="https://www.pref.kochi.lg.jp/sonae-portal2/earthquake/prediction/tsunami.html" target="_blank" style="color:var(--accent);">高知県「南海トラフ地震による津波浸水予測」</a></li>
+    </ul>
+    <p style="margin-bottom:0.5rem;"><strong>能登半島地震の実績データ：</strong></p>
+    <ul style="list-style:disc; padding-left:1.2rem; margin:0 0 1rem 0;">
+      <li>死者数・避難者数・建物被害 — <a href="https://www.bousai.go.jp/updates/r60101notojishin/index.html" target="_blank" style="color:var(--accent);">内閣府「令和６年能登半島地震による被害状況等について」</a></li>
+      <li>最大加速度917ガル（珠洲市正院町） — <a href="https://www.kyoshin.bosai.go.jp/kyoshin/topics/html20240101160813/main_20240101160813.html" target="_blank" style="color:var(--accent);">防災科学技術研究所 K-NET強震観測データ</a></li>
+    </ul>
+    <p style="margin-bottom:0.5rem;"><strong>富山県の想定・歴史地震：</strong></p>
+    <ul style="list-style:disc; padding-left:1.2rem; margin:0 0 0 0;">
+      <li>富山県の地震活動 — <a href="https://www.jishin.go.jp/regional_seismicity/rs_chubu/p16_toyama/" target="_blank" style="color:var(--accent);">地震調査研究推進本部「富山県の地震活動の特徴」</a></li>
+      <li>安政飛越地震（1858年） — <a href="https://www.bousai.go.jp/kyoiku/kyokun/kyoukunnokeishou/rep/1858_hietsu_jishin/index.html" target="_blank" style="color:var(--accent);">内閣府「報告書（1858飛越地震）」</a></li>
+      <li>安政東海・南海地震（1854年） — <a href="https://www.bousai.go.jp/kyoiku/kyokun/kyoukunnokeishou/rep/1854_ansei_toukai_nankai_jishin/index.html" target="_blank" style="color:var(--accent);">内閣府「報告書（1854安政東海地震・安政南海地震）」</a></li>
+    </ul>
+  </div>
+
   <h3 class="sub">震度観測点（珠洲市内）</h3>
-  <div class="tbl-wrap">
+  <div class="tbl-wrap" onclick="toggleCard(this)">
     <table class="data">
       <thead><tr><th>観測点名称</th><th>設置主体</th><th>備考</th></tr></thead>
       <tbody>
@@ -124,5 +165,10 @@
 </div>
 
 <footer><p>防災士講演資料 — 2026年4月19日</p></footer>
+
+<div class="card-overlay" id="cardOverlay" onclick="closeCard()">
+  <button class="card-close" onclick="closeCard()">&times;</button>
+  <div class="card-full" id="cardFull"></div>
+</div>
 </body>
 </html>

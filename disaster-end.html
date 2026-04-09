@@ -13,12 +13,32 @@
 .finale .brush-text strong { color:var(--text); font-size:1.15em; }
 .finale-photo { width:100%; max-width:750px; border-radius:12px; border:1px solid var(--border); margin:2rem auto; display:block; }
 </style>
+<script>
+var _scrollTarget=null;
+var _justOpened=false;
+function toggleCard(el){
+  _scrollTarget=el;
+  _justOpened=true;
+  var overlay=document.getElementById('cardOverlay');
+  var full=document.getElementById('cardFull');
+  full.innerHTML=el.innerHTML;
+  overlay.classList.add('on');
+  document.body.style.overflow='hidden';
+  setTimeout(function(){ _justOpened=false; },400);
+}
+function closeCard(){
+  if(_justOpened) return;
+  document.getElementById('cardOverlay').classList.remove('on');
+  document.body.style.overflow='';
+  if(_scrollTarget){_scrollTarget.scrollIntoView({behavior:'smooth',block:'center'});_scrollTarget=null;}
+}
+</script>
 </head>
 <body>
 <div class="back-btn" onclick="window.location.href='index.html'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>ホームへ</div>
 
 <div class="page">
-  <div class="page-label" style="color:var(--purple);">Section 06</div>
+  <div class="page-label" style="color:var(--purple);">Section 08</div>
   <h1>被災の終わり</h1>
   <p class="lead">被災はいつ終わるのか？ — 私の場合</p>
 
@@ -29,17 +49,17 @@
   <h3 class="sub">被災した日からやる事</h3>
 
   <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
-    <div class="card">
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-icon">🏠</div>
       <h3>避難と引きこもり</h3>
       <p>私の場合、東京に借りている部屋があったのでそちらへ避難した。しかし1年間近くは引きこもり状態であった。</p>
     </div>
-    <div class="card">
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-icon">📋</div>
       <h3>手続きの嵐</h3>
       <p>最初は罹災証明、被災証明などの手続き。私の場合は<strong>中規模半壊</strong>と判定された。解体申請とその手続き。これが無いと支援金や義援金が受け取れない。その他も何もできない。</p>
     </div>
-    <div class="card">
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-icon">🏦</div>
       <h3>各種保険会社への連絡</h3>
       <p>保険会社では独自の査定がある。ここでは半壊だったと思う。</p>
@@ -49,17 +69,17 @@
   <h3 class="sub">片付けと掃除</h3>
 
   <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
-    <div class="card">
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-icon">🏚</div>
       <h3>住む場所・仕事を探す</h3>
       <p>先ず家がなかった人は住む場所を探す。仕事が無くなった人は仕事を探す。仕事や家がないから、金沢など都会に出る必要があった人が多い。</p>
     </div>
-    <div class="card">
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-icon">📦</div>
       <h3>荷物の整理と片付け</h3>
       <p>とにかく大変だった。家は解体と決めていたので掃除はせず。荷物を運ぶこと、運ぶ場所の確保。現地では水や電気が無いため、開通するまで待機した。必要な物を洗ったり整理したりは水がないとできない。</p>
     </div>
-    <div class="card">
+    <div class="card" onclick="toggleCard(this)">
       <div class="card-icon">🌧</div>
       <h3>雨水と土壁の崩壊</h3>
       <p>屋根が壊れると雨水が入る。土壁を通って部屋に侵入する。また地震の時に土壁が崩壊しているので部屋の中は土だらけだった。<strong>自分の大切な物が泥だらけになるのは悲しいことだった。</strong></p>
@@ -73,7 +93,7 @@
   <h3 class="sub">復興への道のり</h3>
 
   <div class="cards" style="grid-template-columns:1fr;">
-    <div class="card" style="text-align:left;">
+    <div class="card" onclick="toggleCard(this)" style="text-align:left;">
       <div class="card-icon">🗓</div>
       <h3>あの日からの歩み</h3>
       <p><strong>2025年</strong> — 富山県に中古住宅を購入。<br>
@@ -96,5 +116,11 @@
 </div>
 
 <footer><p>防災士講演資料 — 2026年4月19日</p></footer>
+
+<div class="card-overlay" id="cardOverlay" onclick="closeCard()">
+  <button class="card-close" onclick="closeCard()">&times;</button>
+  <div class="card-full" id="cardFull"></div>
+</div>
+
 </body>
 </html>
