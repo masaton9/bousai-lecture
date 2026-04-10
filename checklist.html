@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>防災チェックリスト — 備えの詳細</title>
+<style>
+/* ===== 画面表示 ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  background: #f5f5f0;
+  color: #1a1a1a;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+}
+
+.screen-header {
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.4rem;
+  color: #555;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.print-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #e63946;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.6rem;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+}
+.print-btn:hover { background: #c1121f; }
+
+/* ===== A4シート ===== */
+.sheet {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+  padding: 40px 48px;
+}
+
+.sheet-header {
+  border-bottom: 3px solid #e63946;
+  padding-bottom: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.sheet-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #1a1a1a;
+  letter-spacing: 0.05em;
+}
+
+.sheet-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 0.3rem;
+}
+
+.sheet-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 0.6rem;
+  font-size: 1.1rem;
+  color: #888;
+}
+
+/* ===== セクション ===== */
+.section {
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  background: #1d3557;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  letter-spacing: 0.06em;
+}
+
+.section-title.green  { background: #2a9d8f; }
+.section-title.orange { background: #e76f51; }
+
+/* ===== チェック行 ===== */
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 0.55rem 0.4rem;
+  border-bottom: 1px solid #eee;
+}
+.check-row:last-child { border-bottom: none; }
+
+.check-box {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333;
+  border-radius: 4px;
+  margin-top: 2px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background: #fff;
+  position: relative;
+}
+.check-box:checked { background: #e63946; border-color: #e63946; }
+.check-box:checked::after {
+  content: '✓';
+  position: absolute;
+  top: -3px;
+  left: 1px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+.check-label {
+  flex: 1;
+}
+
+.check-main {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.4;
+}
+
+.check-sub {
+  font-size: 1.1rem;
+  color: #555;
+  margin-top: 0.2rem;
+  line-height: 1.5;
+}
+
+/* ===== 備考欄 ===== */
+.memo-section {
+  margin-top: 2rem;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+}
+.memo-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #555;
+  margin-bottom: 0.8rem;
+}
+.memo-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.memo-line {
+  border-bottom: 1px solid #ccc;
+  height: 1.8rem;
+}
+
+/* ===== フッター ===== */
+.sheet-footer {
+  margin-top: 2rem;
+  border-top: 1px solid #eee;
+  padding-top: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: #aaa;
+}
+
+/* ===== 印刷 ===== */
+@page {
+  size: A4 portrait;
+  margin: 12mm 16mm;
+}
+
+@media print {
+  body {
+    background: #fff;
+    padding: 0;
+    font-size: 10pt;
+  }
+
+  .screen-header { display: none; }
+
+  .sheet {
+    max-width: 100%;
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .sheet-title { font-size: 18pt; }
+  .check-main  { font-size: 11pt; }
+  .check-sub   { font-size: 9.5pt; }
+  .section-title { font-size: 11pt; padding: 3pt 8pt; }
+
+  .check-row { padding: 4pt 2pt; }
+  .check-box { width: 14px; height: 14px; border: 1.5px solid #333; }
+  .check-box:checked::after { font-size: 12px; top: -2px; left: 0; }
+
+  .section { margin-bottom: 14pt; }
+  .sheet-header { margin-bottom: 14pt; padding-bottom: 8pt; }
+  .memo-section { margin-top: 14pt; }
+}
+</style>
+</head>
+<body>
+
+<div class="screen-header">
+  <a class="back-btn" href="index.html">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+    ホームへ
+  </a>
+  <button class="print-btn" onclick="window.print()">
+    🖨 A4で印刷する
+  </button>
+</div>
+
+<div class="sheet">
+
+  <div class="sheet-header">
+    <div class="sheet-title">🛡 防災チェックリスト</div>
+    <div class="sheet-subtitle">命を守るための備え — 本当に必要なもの</div>
+    <div class="sheet-meta">
+      <span>防災士講演資料 | 中林 昌人</span>
+      <span>確認日：＿＿＿年＿＿月＿＿日</span>
+    </div>
+  </div>
+
+  <!-- ===== Section 1 ===== -->
+  <div class="section">
+    <div class="section-title">💡 日頃の備えの心構え</div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">日頃の備え（アナログ品・車への積載）</div>
+        <div class="check-sub">ペン・紙・テープ・ロープ、水・食料・寝袋を日頃から車に積んでおく</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">車の鍵の置き場所を決める</div>
+        <div class="check-sub">地震で棚ごと転倒して行方不明になるケースが多い。固定した定位置を決める</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">① 火災保険（地震保険）の見直し</div>
+        <div class="check-sub">地震保険は火災保険に付帯。能登の経験：3度目の地震後に最大額で1,500万円受領。今すぐ見直せる最重要な備え</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">② 飲み水・生活用水の確保</div>
+        <div class="check-sub">水がないと衛生面が崩壊。サランラップを皿に被せると洗わず使える。ポリタンク・ウォーターサーバー等を備蓄</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">③ 簡易トイレの準備</div>
+        <div class="check-sub">最も深刻だったのがトイレ問題。お尻ふき兼体ふきシート、凝固剤入り携帯トイレを人数分×日数で備蓄</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">④ 美味しい保存食の備蓄</div>
+        <div class="check-sub">尾西のおにぎり（水で戻せる）、無印良品コアラパン、サトウのご飯、サバ缶、焼き鳥缶。最低3日分（できれば1週間分）</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">⑤ 土鍋でのご飯の炊き方を覚える</div>
+        <div class="check-sub">ガスや直火でご飯を炊く方法を家族全員が知っておく</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">⑥ 自分と家族の日用品</div>
+        <div class="check-sub">常備薬・ドッグフード等ペット用品・夏の暑さ対策・冬の寒さ対策。家族全員（ペット含む）分を想定して準備</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Section 2 ===== -->
+  <div class="section">
+    <div class="section-title green">⛺ キャンプ用品</div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">キャンプ道具一式</div>
+        <div class="check-sub">テント・寝袋・バーナー・クッカー・ランタン等。要はキャンプ！ヤフオク・メルカリで中古品がお得</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Section 3 ===== -->
+  <div class="section">
+    <div class="section-title orange">✨ あればベストな物</div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">井戸</div>
+        <div class="check-sub">生活用水（洗い物・トイレ）として活用できる。飲み水でなくても大きな助けになる</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">アマチュア無線</div>
+        <div class="check-sub">震災は情報戦。スマホは3日で通信不能になった経験から。免許取得も検討を</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">ポータブル電源（Jackery等）</div>
+        <div class="check-sub">充電方法は3つ：コンセント・ソーラー発電・車の走行充電。井戸の電磁ポンプも動かせた</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">ソーラーパネル（大容量・2枚）</div>
+        <div class="check-sub">1枚だと充電に約20時間。冬（日照5時間）では4日かかる計算。できれば大容量2枚を用意</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">発電機（ガスガソリン両対応）</div>
+        <div class="check-sub">チャンピオン・GGG等。プロパンガスでもガソリンでも動くデュアルフューエル機能が便利</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">スターリンク</div>
+        <div class="check-sub">非常に便利だが電力消費が大きい。使うときだけ電源を入れること</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">燃料の多めの備蓄（ガソリン・灯油）</div>
+        <div class="check-sub">移動・発電機・ポータブル電源充電・暖房・調理に必須。携行缶で多めに備蓄</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">湯たんぽ</div>
+        <div class="check-sub">電気・ガス不要。お湯さえあれば就寝時の体温維持に効果大。冬の避難で非常に実用的</div>
+      </div>
+    </div>
+
+    <div class="check-row">
+      <input type="checkbox" class="check-box">
+      <div class="check-label">
+        <div class="check-main">スノーウエア</div>
+        <div class="check-sub">能登半島地震は1月1日（厳冬期）発生。屋外作業・移動・車中泊で必須。通常の防寒着より格段に暖かい</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 備考欄 ===== -->
+  <div class="memo-section">
+    <div class="memo-title">📝 備考・追加品目</div>
+    <div class="memo-lines">
+      <div class="memo-line"></div>
+      <div class="memo-line"></div>
+      <div class="memo-line"></div>
+      <div class="memo-line"></div>
+    </div>
+  </div>
+
+  <div class="sheet-footer">
+    <span>防災士講演資料 — 中林 昌人（48歳）</span>
+    <span>masato-bousai.netlify.app</span>
+  </div>
+
+</div>
+
+</body>
+</html>
