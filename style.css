@@ -285,11 +285,41 @@ footer {
 .card .g-grid img { height:auto; max-height:200px; object-fit:contain; background:transparent; }
 /* hide photos in card view, show only in overlay */
 .card-photos-hidden { display:none; }
-.card-overlay .card-full .card-photos-hidden { display:grid; }
+.card-overlay .card-full .card-photos-hidden {
+  display:flex;
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+  scroll-snap-type:x mandatory;
+  gap:2rem;
+  padding:1.5rem 0 1rem;
+  margin-top:1.5rem;
+}
+.card-overlay .card-full .card-photos-hidden > div {
+  flex:0 0 auto;
+  width:min(80vw, 500px);
+  scroll-snap-align:center;
+  text-align:center;
+}
+.card-overlay .card-full .card-photos-hidden > div img {
+  max-height:60vh;
+  width:100%;
+  object-fit:contain;
+  border-radius:12px;
+  cursor:pointer;
+}
+.card-overlay .card-full .card-photos-hidden > div p {
+  font-size:1.6rem;
+  margin-top:0.5rem;
+}
+/* scrollbar styling */
+.card-overlay .card-full .card-photos-hidden::-webkit-scrollbar { height:6px; }
+.card-overlay .card-full .card-photos-hidden::-webkit-scrollbar-track { background:transparent; }
+.card-overlay .card-full .card-photos-hidden::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
 
 /* ── Expanded: all element types (標準: h3=3.2rem, 本文=2.4rem, line-height:2.2) ── */
-.card-overlay .card-full .g-grid { grid-template-columns:repeat(4,1fr); gap:.5rem; margin-top:1rem; }
-.card-overlay .card-full .g-grid img { max-height:40vh; height:auto; object-fit:contain; }
+.card-overlay .card-full .g-grid:not(.card-photos-hidden) { grid-template-columns:repeat(4,1fr); gap:.5rem; margin-top:1rem; }
+.card-overlay .card-full .g-grid:not(.card-photos-hidden) img { max-height:40vh; height:auto; object-fit:contain; }
 
 /* expanded table */
 .card-overlay .card-full table.data { font-size:2.4rem; }
@@ -334,6 +364,8 @@ footer {
   .card-overlay .card-full h3 { font-size:1.8rem; }
   .card-overlay .card-full p { font-size:1.3rem; line-height:2; }
   .card-overlay .card-full .card-icon { width:52px; height:52px; font-size:1.6rem; }
+  .card-overlay .card-full .card-photos-hidden > div { width:85vw; }
+  .card-overlay .card-full .card-photos-hidden > div p { font-size:1.1rem; }
   .card-overlay .card-full table.data th,
   .card-overlay .card-full table.data td { font-size:1rem; padding:.6rem; }
   .card-overlay .card-full .stat-val { font-size:2rem; }
