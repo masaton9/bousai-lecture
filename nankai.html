@@ -179,6 +179,9 @@ document.addEventListener('contextmenu', function(e){
 document.addEventListener('dragstart', function(e){
   if(e.target.tagName==='IMG') e.preventDefault();
 });
+document.addEventListener('touchstart', function(e){
+  if(e.target.tagName==='IMG') e.target.addEventListener('touchend', function(ev){ ev.preventDefault(); }, {once:true});
+}, {passive:false});
 </script>
 </body>
 </html>
