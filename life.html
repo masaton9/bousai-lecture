@@ -284,10 +284,10 @@ function closeCard(){
 <script>
 function openLb(el){
   document.getElementById('lbImg').src = el.src;
-  document.getElementById('lb').classList.add('active');
+  document.getElementById('lb').classList.add('on');
 }
 function closeLb(){
-  document.getElementById('lb').classList.remove('active');
+  document.getElementById('lb').classList.remove('on');
 }
 </script>
 
@@ -306,5 +306,6 @@ document.addEventListener('touchstart', function(e){
   if(e.target.tagName==='IMG') e.target.addEventListener('touchend', function(ev){ ev.preventDefault(); }, {once:true});
 }, {passive:false});
 </script>
+<script>document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeLb(); });</script>
 </body>
 </html>

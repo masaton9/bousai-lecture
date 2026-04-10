@@ -168,6 +168,11 @@ function closeCard(){
 
 <footer><p>防災士講演資料 — 2026年4月19日</p></footer>
 
+<div id="lb" class="lb" onclick="closeLb()">
+  <button class="lb-x" onclick="closeLb()">&times;</button>
+  <img id="lb-img" src="" alt="">
+</div>
+
 <div class="card-overlay" id="cardOverlay" onclick="closeCard()">
   <button class="card-close" onclick="closeCard()">&times;</button>
   <div class="card-full" id="cardFull"></div>
@@ -182,6 +187,15 @@ document.addEventListener('dragstart', function(e){
 document.addEventListener('touchstart', function(e){
   if(e.target.tagName==='IMG') e.target.addEventListener('touchend', function(ev){ ev.preventDefault(); }, {once:true});
 }, {passive:false});
+</script>
+<script>
+function openLb(el) {
+  var img = document.getElementById('lb-img');
+  img.src = el.src;
+  document.getElementById('lb').classList.add('on');
+}
+function closeLb() { document.getElementById('lb').classList.remove('on'); }
+document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeLb(); });
 </script>
 </body>
 </html>

@@ -243,6 +243,7 @@ function closeCard(){
 <script>
 function openLb(el){ document.getElementById('lbImg').src=el.src; document.getElementById('lb').classList.add('on'); }
 function closeLb(){ document.getElementById('lb').classList.remove('on'); }
+document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeLb(); });
 </script>
 
 <footer><p>防災士講演資料 — 2026年4月19日</p></footer>
