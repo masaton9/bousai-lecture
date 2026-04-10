@@ -20,6 +20,7 @@ function toggleCard(el){
 }
 function closeCard(){
   if(_justOpened) return;
+  if(document.getElementById('lb').classList.contains('on')) return;
   document.getElementById('cardOverlay').classList.remove('on');
   document.body.style.overflow='';
   if(_scrollTarget){_scrollTarget.scrollIntoView({behavior:'smooth',block:'center'});_scrollTarget=null;}
@@ -250,8 +251,9 @@ function closeCard(){
   <img id="lb-img" src="" alt="">
 </div>
 <script>
-function openLb(el){ var lb=document.getElementById('lb'); document.getElementById('lb-img').src=el.src; lb.classList.add('open'); }
-function closeLb(){ document.getElementById('lb').classList.remove('open'); }
+function openLb(el){ var lb=document.getElementById('lb'); document.getElementById('lb-img').src=el.src; lb.classList.add('on'); }
+function closeLb(){ document.getElementById('lb').classList.remove('on'); }
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLb(); });
 </script>
 
 <div class="card-overlay" id="cardOverlay" onclick="closeCard()">
