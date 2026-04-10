@@ -177,6 +177,20 @@ ol.num li strong { color:var(--text); }
 }
 .g-grid img:hover { transform:scale(1.03); opacity:1; }
 
+/* ── Image protection (download/copy prevention) ── */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  pointer-events: auto;
+}
+
 /* ── Lightbox ── */
 .lb {
   display:none; position:fixed; inset:0; z-index:4000;

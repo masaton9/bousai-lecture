@@ -150,6 +150,7 @@ function toggleCard(el){
   var full=document.getElementById('cardFull');
   full.innerHTML=el.innerHTML;
   overlay.classList.add('on');
+  overlay.scrollTop=0;
   document.body.style.overflow='hidden';
   setTimeout(function(){ _justOpened=false; },400);
 }
@@ -251,5 +252,13 @@ function closeLb(){ document.getElementById('lb').classList.remove('on'); }
   <div class="card-full" id="cardFull"></div>
 </div>
 
+<script>
+document.addEventListener('contextmenu', function(e){
+  if(e.target.tagName==='IMG') e.preventDefault();
+});
+document.addEventListener('dragstart', function(e){
+  if(e.target.tagName==='IMG') e.preventDefault();
+});
+</script>
 </body>
 </html>

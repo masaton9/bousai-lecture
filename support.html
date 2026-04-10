@@ -124,5 +124,13 @@
 </div>
 
 <footer><p>防災士講演資料 — 2026年4月19日</p></footer>
+<script>
+document.addEventListener('contextmenu', function(e){
+  if(e.target.tagName==='IMG') e.preventDefault();
+});
+document.addEventListener('dragstart', function(e){
+  if(e.target.tagName==='IMG') e.preventDefault();
+});
+</script>
 </body>
 </html>

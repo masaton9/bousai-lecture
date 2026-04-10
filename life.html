@@ -151,11 +151,13 @@ function toggleCard(el){
   var full=document.getElementById('cardFull');
   full.innerHTML=el.innerHTML;
   overlay.classList.add('on');
+  overlay.scrollTop=0;
   document.body.style.overflow='hidden';
   setTimeout(function(){ _justOpened=false; },400);
 }
 function closeCard(){
   if(_justOpened) return;
+  if(document.getElementById('lb').classList.contains('on')) return;
   document.getElementById('cardOverlay').classList.remove('on');
   document.body.style.overflow='';
   if(_scrollTarget){_scrollTarget.scrollIntoView({behavior:'smooth',block:'center'});_scrollTarget=null;}
@@ -293,5 +295,13 @@ function closeLb(){
   <button class="card-close" onclick="closeCard()">&times;</button>
   <div class="card-full" id="cardFull"></div>
 </div>
+<script>
+document.addEventListener('contextmenu', function(e){
+  if(e.target.tagName==='IMG') e.preventDefault();
+});
+document.addEventListener('dragstart', function(e){
+  if(e.target.tagName==='IMG') e.preventDefault();
+});
+</script>
 </body>
 </html>
