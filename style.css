@@ -179,7 +179,7 @@ ol.num li strong { color:var(--text); }
 
 /* ── Lightbox ── */
 .lb {
-  display:none; position:fixed; inset:0; z-index:2000;
+  display:none; position:fixed; inset:0; z-index:4000;
   background:rgba(0,0,0,0.88); justify-content:center; align-items:center; cursor:zoom-out;
 }
 .lb.on { display:flex; }
