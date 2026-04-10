@@ -261,8 +261,6 @@ function closeCard(){
 
 <script>
 function openLb(el) {
-  var e = window.event || arguments.callee.caller.arguments[0];
-  if(e) e.stopPropagation();
   var img = document.getElementById('lb-img');
   img.src = el.src;
   document.getElementById('lb').classList.add('on');
